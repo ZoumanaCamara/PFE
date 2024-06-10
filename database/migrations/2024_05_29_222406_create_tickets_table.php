@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type_ticket_id')->constrained()->cascadeOnDelete(); 
+            $table->foreignId('typeticket_id')->constrained()->cascadeOnDelete(); 
             $table->foreignId('purchase_id')->constrained()->cascadeOnDelete(); 
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete(); 
             $table->string('numero_ticket')->unique(); 
@@ -34,8 +34,8 @@ return new class extends Migration
     {
 
         // Schema::table('tickets', function (Blueprint $table) {
-        //     $table->dropForeign(['type_ticket_id', 'purchase_id', 'cart_id']); 
-        //     $table->dropColumn(['type_ticket_id', 'purchase_id', 'cart_id']); 
+        //     $table->dropForeign(['typeticket_id', 'purchase_id', 'cart_id']); 
+        //     $table->dropColumn(['typeticket_id', 'purchase_id', 'cart_id']); 
         // });
         
 
