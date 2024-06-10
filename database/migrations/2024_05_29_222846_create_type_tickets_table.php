@@ -31,7 +31,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('type_tickets');
         Schema::table('tickets', function (Blueprint $table) {
-            $table->dropForeignIdFor(TypeTicket::class)->constrained()->cascadeOnDelete(); 
+            $table->dropForeignIdFor(TypeTicket::class);
         });
         
     }
