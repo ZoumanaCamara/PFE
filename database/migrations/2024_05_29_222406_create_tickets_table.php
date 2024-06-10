@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Ticket;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,14 @@ return new class extends Migration
             $table->string('code_qr')->unique; 
             $table->timestamps();
         });
+
+        Schema::table('events', function (Blueprint $table) {
+            $table->foreignIdFor(Ticket::class)->constrained()->cascadeOnDelete(); 
+        });
+
+        Schema::table('purchases', function (Blueprint $table) {
+            $table->foreignIdFor(Ticket::class)->constrained()->cascadeOnDelete(); 
+        });
     }
 
     /**
@@ -27,6 +36,15 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropForeignIdFor(Ticket::class); 
+        });
+
+        Schema::table('purchases', function (Blueprint $table) {
+            $table->dropForeignIdFor(Ticket::class); 
+        });
+
+
         Schema::dropIfExists('tickets');
     }
 };
