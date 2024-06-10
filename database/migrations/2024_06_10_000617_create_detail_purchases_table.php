@@ -16,14 +16,19 @@ return new class extends Migration
             $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
+
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function dow(): void 
     {
-        Schema::dropColumns('purchase_id'); 
+        Schema::table('detail_purchases', function (Blueprint $table) {
+            $table->dropForeign('purchase_id');
+            $table->dropColumn('purchase_id'); 
+        });
+
         Schema::dropIfExists('detail_purchases');
     }
 };
