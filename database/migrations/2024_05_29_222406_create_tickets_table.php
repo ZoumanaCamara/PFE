@@ -14,6 +14,9 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('type_ticket_id')->constrained()->cascadeOnDelete(); 
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete(); 
+            $table->foreignId('cart_id')->constrained()->cascadeOnDelete(); 
             $table->string('numero_ticket')->unique(); 
             $table->float('prix'); 
             $table->string('type'); 
@@ -22,13 +25,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('events', function (Blueprint $table) {
-            $table->foreignIdFor(Ticket::class)->constrained()->cascadeOnDelete(); 
-        });
-
-        Schema::table('purchases', function (Blueprint $table) {
-            $table->foreignIdFor(Ticket::class)->constrained()->cascadeOnDelete(); 
-        });
     }
 
     /**
@@ -36,15 +32,14 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->dropForeign(['type_ticket_id', 'purchase_id', 'cart_id']); 
+            $table->dropColumn(['type_ticket_id', 'purchase_id', 'cart_id']); 
+        });
+        
+
         Schema::dropIfExists('tickets');
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropForeignIdFor(Ticket::class); 
-        });
-
-        Schema::table('purchases', function (Blueprint $table) {
-            $table->dropForeignIdFor(Ticket::class); 
-        });
-
-
+        
     }
 };

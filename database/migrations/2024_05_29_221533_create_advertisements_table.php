@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();  
             $table->string('categorie'); 
             $table->string('description'); 
             $table->string('contenu'); 
@@ -27,6 +28,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('advertisements', function(Blueprint $table) {
+            $table->dropForeign(['user_id']); 
+            $table->dropColumn(['user_id']); 
+        }); 
+
         Schema::dropIfExists('advertisements');
     }
 };

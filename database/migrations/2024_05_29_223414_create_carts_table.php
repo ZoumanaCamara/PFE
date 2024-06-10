@@ -14,17 +14,10 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); 
             $table->float('total');
-            $table->string('etat');  
+            $table->string('etat');
             $table->timestamps();
-        });
-
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->foreignIdFor(Cart::class)->constrained()->cascadeOnDelete(); 
-        });
-
-        Schema::table('articles', function (Blueprint $table) {
-            $table->foreignIdFor(Cart::class)->constrained()->cascadeOnDelete(); 
         });
     }
 
@@ -33,14 +26,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        Schema::table('carts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn(['user_id']);
+        });
+
         Schema::dropIfExists('carts');
-        
-            Schema::table('tickets', function (Blueprint $table) {
-                $table->dropForeignIdFor(Cart::class); 
-            });
-    
-            Schema::table('articles', function (Blueprint $table) {
-                $table->dropForeignIdFor(Cart::class); 
-            });
     }
 };

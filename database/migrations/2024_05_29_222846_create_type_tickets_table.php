@@ -19,9 +19,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->foreignIdFor(TypeTicket::class)->constrained()->cascadeOnDelete(); 
-        });
     }
 
     /**
@@ -30,9 +27,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('type_tickets');
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->dropForeignIdFor(TypeTicket::class);
-        });
-        
     }
 };
