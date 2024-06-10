@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Annoucement extends Model
+class DetailPurchase extends Model
 {
     use HasFactory;
 
-    public function user(): BelongsTo
+    public function purchase(): BelongsTo
     {
-        return $this->belongsTo(User::class); 
+        return $this->belongsTo(Purchase::class); 
     }
-
 }
