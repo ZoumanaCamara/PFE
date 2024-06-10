@@ -33,14 +33,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->dropForeignIdFor(Cart::class); 
-        });
-
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropForeignIdFor(Cart::class); 
-        });
-
         Schema::dropIfExists('carts');
+        
+            Schema::table('tickets', function (Blueprint $table) {
+                $table->dropForeignIdFor(Cart::class); 
+            });
+    
+            Schema::table('articles', function (Blueprint $table) {
+                $table->dropForeignIdFor(Cart::class); 
+            });
     }
 };

@@ -56,6 +56,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        Schema::dropIfExists('users');
+
+
         Schema::table('annoucements', function (Blueprint $table) {
             $table->dropForeignIdFor(User::class); 
         });
@@ -81,6 +85,5 @@ return new class extends Migration
         });
 
 
-        Schema::dropIfExists('users');
     }
 };

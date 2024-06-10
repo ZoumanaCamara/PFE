@@ -24,11 +24,11 @@ return new class extends Migration
      */
     public function dow(): void 
     {
+        Schema::dropIfExists('detail_purchases');
         Schema::table('detail_purchases', function (Blueprint $table) {
             $table->dropForeign('purchase_id');
             $table->dropColumn('purchase_id'); 
         });
 
-        Schema::dropIfExists('detail_purchases');
     }
 };

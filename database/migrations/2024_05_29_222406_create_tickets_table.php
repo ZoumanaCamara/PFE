@@ -36,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('tickets');
         Schema::table('events', function (Blueprint $table) {
             $table->dropForeignIdFor(Ticket::class); 
         });
@@ -45,6 +46,5 @@ return new class extends Migration
         });
 
 
-        Schema::dropIfExists('tickets');
     }
 };
