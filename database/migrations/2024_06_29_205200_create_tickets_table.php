@@ -33,7 +33,9 @@ return new class extends Migration
     {
 
         Schema::table('tickets', function (Blueprint $table) {
-            $table->dropForeign(['typeticket_id', 'purchase_id', 'cart_id']); 
+            $table->dropForeign(['typeticket_id']); 
+            $table->dropForeign(['purchase_id']); 
+            $table->dropForeign(['cart_id']); 
             $table->dropColumn(['typeticket_id', 'purchase_id', 'cart_id']); 
         });
         
