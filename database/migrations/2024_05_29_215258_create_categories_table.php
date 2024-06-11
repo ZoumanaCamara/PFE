@@ -19,9 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::table('articles', function(Blueprint $table) {
-            $table->foreignIdFor(Category::class)->constrained()->nullOnDelete(); 
-        }); 
+
     }
 
     /**
@@ -29,9 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('articles', function(Blueprint $table) {
-            $table->dropForeignIdFor(Category::class); 
-        }); 
         Schema::dropIfExists('categories');
     }
 };

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); 
             $table->string('quantite'); 
             $table->float('montant'); 
             $table->string('methode_paiement'); 
@@ -26,6 +27,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('purchases', function (Blueprint $table) {
+            
+            $table->dropForeign(['user_id']); 
+            $table->dropColumn(['user_id']); 
+        });
+
         Schema::dropIfExists('purchases');
     }
 };
