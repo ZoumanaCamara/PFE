@@ -12,6 +12,7 @@ class RouteServiceProvider extends ServiceProvider
 {
     /**
      * The path to your application's "home" route.
+     * je skjfkfk
      *
      * Typically, users are redirected here after authentication.
      *
