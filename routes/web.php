@@ -13,6 +13,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [AdminAuthController::class, 'showLoginForm'])->name('login'); 
-Route::post('/', [AdminAuthController::class, 'login']); 
